@@ -7,6 +7,7 @@ import {
 } from "fullscreen-canvas-vanilla";
 import { GameEngineFactory } from "zippy-game-engine";
 import { createRotatingRectScene } from "./createRotatingRectScene";
+import { createCrossLinesScene } from "./createCrossLinesScene";
 
 window.addEventListener("load", async () => {
     const browserEnvironment: BrowserEnvironment = new RealBrowserEnvironment();
@@ -17,6 +18,7 @@ window.addEventListener("load", async () => {
 
     const options: FullscreenCanvasOptions = { loop: true };
 
+    gameEngine.registerScene("Cross Lines", createCrossLinesScene(gameEngine));
     gameEngine.registerScene(
         "Rotating Rectangle",
         createRotatingRectScene(gameEngine)
