@@ -1,4 +1,4 @@
-import type { FrameContext } from "fullscreen-canvas-vanilla";
+import type { FrameContext } from "zippy-shared-lib";
 import { GameEngine } from "zippy-game-engine";
 import type { Scene } from "zippy-game-engine";
 
@@ -6,14 +6,14 @@ interface RotatingRectSceneConfig {
     rectSize: number;
 }
 
-export const createRotatingRectScene = (game: GameEngine): Scene => {
+export const createRotatingRectScene = (_gameEngine: GameEngine): Scene => {
     const config: RotatingRectSceneConfig = {
         rectSize: 200,
     };
 
     const renderBackground = (ctx: CanvasRenderingContext2D): void => {
         ctx.fillStyle = "#222";
-        ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     };
 
     const renderRotatingRect = (context: FrameContext): void => {

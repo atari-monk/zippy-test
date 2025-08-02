@@ -1,24 +1,34 @@
 import "./style.css";
-import { GameAppFactory, GameEngine } from "zippy-game-engine";
-import { FullscreenCanvas, type FrameContext } from "fullscreen-canvas-vanilla";
-import { createCrossLinesScene } from "./createCrossLinesScene";
+import type { BrowserEnvironment, EventSystem } from "zippy-shared-lib";
+import { BrowserEventSystem, RealBrowserEnvironment } from "zippy-shared-lib";
+import {
+    createGameCanvas,
+    type FullscreenCanvasOptions,
+} from "fullscreen-canvas-vanilla";
+import { GameEngineFactory } from "zippy-game-engine";
 import { createRotatingRectScene } from "./createRotatingRectScene";
 
 window.addEventListener("load", async () => {
-    const gameApp = new GameAppFactory();
-    await gameApp.initialize();
-    const gameEngine: GameEngine = gameApp.getGameEngine();
-    gameApp.registerScene("Cross Lines", createCrossLinesScene(gameEngine));
-    gameApp.registerScene(
+    const browserEnvironment: BrowserEnvironment = new RealBrowserEnvironment();
+    const eventSystem: EventSystem = new BrowserEventSystem(browserEnvironment);
+
+    const gameEngineFactory = new GameEngineFactory(eventSystem);
+    const gameEngine = gameEngineFactory.getGameEngine();
+
+    const options: FullscreenCanvasOptions = { loop: true };
+
+    gameEngine.registerScene(
         "Rotating Rectangle",
         createRotatingRectScene(gameEngine)
     );
-    gameApp.transitionToScene("Rotating Rectangle");
+    gameEngine.transitionToScene("Rotating Rectangle");
 
-    new FullscreenCanvas("canvas-container", "game-canvas", {
-        frameTick: (context: FrameContext) => {
-            gameEngine.frameTick(context);
-        },
-        loop: true,
-    });
+    createGameCanvas(
+        "canvas-container",
+        "game-canvas",
+        eventSystem,
+        browserEnvironment,
+        gameEngine,
+        options
+    );
 });

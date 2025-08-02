@@ -1,4 +1,4 @@
-import type { FrameContext } from "fullscreen-canvas-vanilla";
+import type { FrameContext } from "zippy-shared-lib";
 import { GameEngine } from "zippy-game-engine";
 import type { Scene } from "zippy-game-engine";
 
@@ -7,7 +7,7 @@ interface CrossLinesSceneConfig {
     lineWidth: number;
 }
 
-export const createCrossLinesScene = (game: GameEngine): Scene => {
+export const createCrossLinesScene = (_gameEngine: GameEngine): Scene => {
     const config: CrossLinesSceneConfig = {
         lineColor: "green",
         lineWidth: 3,
@@ -15,7 +15,7 @@ export const createCrossLinesScene = (game: GameEngine): Scene => {
 
     const renderBackground = (ctx: CanvasRenderingContext2D): void => {
         ctx.fillStyle = "#222";
-        ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     };
 
     const renderLines = (ctx: CanvasRenderingContext2D): void => {
@@ -29,13 +29,13 @@ export const createCrossLinesScene = (game: GameEngine): Scene => {
         ctx.stroke();
 
         function drawHorizontalLine() {
-            ctx.moveTo(0, game.canvas.height / 2);
-            ctx.lineTo(game.canvas.width, game.canvas.height / 2);
+            ctx.moveTo(0, ctx.canvas.height / 2);
+            ctx.lineTo(ctx.canvas.width, ctx.canvas.height / 2);
         }
 
         function drawVerticalLine() {
-            ctx.moveTo(game.canvas.width / 2, 0);
-            ctx.lineTo(game.canvas.width / 2, game.canvas.height);
+            ctx.moveTo(ctx.canvas.width / 2, 0);
+            ctx.lineTo(ctx.canvas.width / 2, ctx.canvas.height);
         }
     };
 

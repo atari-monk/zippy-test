@@ -14,6 +14,9 @@ importers:
       zippy-game-engine:
         specifier: file:../zippy
         version: file:../zippy
+      zippy-shared-lib:
+        specifier: file:../zippy-shared-lib
+        version: file:../zippy-shared-lib
     devDependencies:
       typescript:
         specifier: ~5.8.3
@@ -381,6 +384,12 @@ packages:
   zippy-game-engine@file:../zippy:
     resolution: {directory: ../zippy, type: directory}
 
+  zippy-shared-lib@0.1.4:
+    resolution: {integrity: sha512-m9xkDjxoUg+o7a13olhwkxQAkFfrt0RQtXYP4tiZQD3w4UqYJkyDFfKt41jrbYM9kt4uBPH3YdrdQOFFWZpPog==}
+
+  zippy-shared-lib@file:../zippy-shared-lib:
+    resolution: {directory: ../zippy-shared-lib, type: directory}
+
 snapshots:
 
   '@esbuild/aix-ppc64@0.25.8':
@@ -559,7 +568,9 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fullscreen-canvas-vanilla@file:../fullscreen-canvas-vanilla: {}
+  fullscreen-canvas-vanilla@file:../fullscreen-canvas-vanilla:
+    dependencies:
+      zippy-shared-lib: 0.1.4
 
   nanoid@3.3.11: {}
 
@@ -619,4 +630,10 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  zippy-game-engine@file:../zippy: {}
+  zippy-game-engine@file:../zippy:
+    dependencies:
+      zippy-shared-lib: 0.1.4
+
+  zippy-shared-lib@0.1.4: {}
+
+  zippy-shared-lib@file:../zippy-shared-lib: {}

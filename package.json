@@ -13,6 +13,7 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
+        "zippy-shared-lib": "file:../zippy-shared-lib",
         "fullscreen-canvas-vanilla": "file:../fullscreen-canvas-vanilla",
         "zippy-game-engine": "file:../zippy"
     }
